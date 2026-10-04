@@ -40,7 +40,19 @@ export const jurisdiction = defineType({
                     name: 'dayLimit',
                     type: 'number',
                     title: 'Day Threshold Limit',
-                    description: 'Numer of physical days triggering residency (e.g. 90 or 183). Leave empty if purely non-day-based.'
+                    description: 'The statutory integer stated in the law (e.g., 183 for Spain, 182 for India, 60 for Cyprus).'
+                }),
+                defineField({
+                    name: 'comparisonOperator',
+                    type: 'string',
+                    title: 'Operator',
+                    options: {
+                        list: [
+                            { title: 'Strictly Greater Than (> / Exceeding, triggers at N+1)', value: 'greater_than' },
+                            { title: 'Greater Than or Equal (>= / At Least, triggers at N)', value: 'greater_than_or_equal' }
+                        ]
+                    },
+                    initialValue: 'greater_than'
                 }),
                 defineField({
                     name: 'calculationWindow',
