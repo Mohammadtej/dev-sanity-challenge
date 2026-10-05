@@ -46,6 +46,7 @@ async function seedV2() {
     })
 
     // 3. Germany: 6-Month Habitual Abode across Year Boundaries
+    // Germany: 6-Month Habitual Abode across Year Boundaries
     await client.createOrReplace({
         _id: 'jurisdiction-de',
         _type: 'jurisdiction',
@@ -54,11 +55,11 @@ async function seedV2() {
         taxYearCycle: 'calendar_year',
         statutoryPresenceRules: {
             daysLimit: 183,
-            comparisonOperator: 'greater_than',
-            calculationWindow: 'consecutive_days', // Evaluated across year boundaries
+            comparisonOperator: 'greater_than', // Strictly > 183 days (effectively 184+ days / > 6 months)
+            calculationWindow: 'consecutive_days',
         },
         officialStatuteCitation:
-            'Abgabenordnung (AO) § 9: A habitual abode (Gewöhnlicher Aufenthalt) is established by a continuous physical presence of more than 6 months (183 days). Short absences are disregarded, and presence straddling two calendar years applies retroactively to the date of initial entry.',
+            'Abgabenordnung (AO) § 9 Satz 2: A habitual abode (Gewöhnlicher Aufenthalt) requires continuous physical presence strictly exceeding six months (>183 days, effectively triggering at 184 or more days). Presence of exactly 183 days or fewer does not satisfy this statutory rule. Short interruptions are disregarded, and presence straddling two calendar years applies retroactively from entry.',
     })
 
     // 4. India: 182-Day Commonwealth Fiscal Year Rule
