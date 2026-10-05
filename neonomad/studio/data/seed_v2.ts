@@ -140,6 +140,26 @@ async function seedV2() {
         sourceTreatyUrl: 'https://incometaxindia.gov.in/DTAA/Germany.pdf',
     })
 
+    // Treaty 4: Germany - Spain DTAA (Resolves Triangular Corporate PE & Cross-border Relief)
+    await client.createOrReplace({
+        _id: 'treaty-de-es',
+        _type: 'bilateralTreaty',
+        title: 'Agreement Between the Federal Republic of Germany and the Kingdom of Spain for the Avoidance of Double Taxation',
+        signatoryA: { _type: 'reference', _ref: 'jurisdiction-de' },
+        signatoryB: { _type: 'reference', _ref: 'jurisdiction-es' },
+        article15Terms: {
+            exemptionDayLimit: 183,
+            countingPeriod: 'rolling_12_months',
+            conditions: [
+                'Recipient is present in the host state for <= 183 days in any 12-month period',
+                'Remuneration is paid by or on behalf of an employer not resident in the host state',
+                'Remuneration is not borne by a permanent establishment in the host state',
+            ],
+        },
+        legalHierarchyStatus: 'supersedes_domestic',
+        sourceTreatyUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-2012-9764',
+    })
+
     console.log('Seeding completed successfully with zero duplicates!')
 }
 
